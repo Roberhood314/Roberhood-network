@@ -1,0 +1,19 @@
+pragma solidity ^0.8.0;
+
+contract Roberhood {
+    string public name = "Roberhood Coin";
+    string public symbol = "RBC";
+    uint256 public totalSupply = 1000000000 * 10 ** 18;
+    mapping(address => uint256) public balanceOf;
+
+    constructor() {
+        balanceOf[msg.sender] = totalSupply;
+    }
+
+    function transfer(address _to, uint256 _amount) public returns (bool) {
+        require(balanceOf[msg.sender] >= _amount, "Insufficient balance");
+        balanceOf[msg.sender] -= _amount;
+        balanceOf[_to] += _amount;
+        return true;
+    }
+}
